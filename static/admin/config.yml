@@ -1,6 +1,3 @@
-site_url: https://ntn-boilerplate.netlify.app/
-logo_url: https://ntn-boilerplate.netlify.app/icon.png
-
 publish_mode: editorial_workflow
 backend:
   name: git-gateway
@@ -13,7 +10,6 @@ local_backend: true
 media_folder: static/img
 public_folder: /img
 
-# Docs: https://www.netlifycms.org/docs/configuration-options/#collections
 collections:
   - label: 'Site settings'
     name: 'site'
@@ -39,44 +35,1497 @@ collections:
               pattern: ['^[a-z]{2}([-])?([A-Za-z]{2})?$', 'Must match "xx" or "xx-XX" syntax (ex. "en" or "sv-SE")'],
             }
           # - { label: Site Email, name: siteemail, widget: string, required: false }
-  - name: 'blog'
-    label: 'Blog'
-    folder: 'content/blog'
-    create: true
-    format: 'frontmatter'
-    slug: '{{fields.createdAt}}-{{slug}}'
-    # editor:
-    #   preview: true
-    fields:
-      - { label: 'Created Date', name: 'createdAt', widget: 'datetime', date_format: "YYYY-MM-DD", time_format: false }
-      - { label: 'Title', name: 'title', widget: 'string', required: true }
-      - { label: 'Description', name: 'description', widget: 'string', required: false }
-      - { label: 'Body', name: 'body', widget: 'markdown', required: false }
-  - name: 'projects'
-    label: 'Projects'
-    label_singular: 'Project'
-    folder: 'content/projects'
-    create: true
-    format: 'frontmatter'
-    slug: '{{slug}}'
-    preview_path: 'projects/{{slug}}'
-    fields:
+  # - name: 'blog'
+  #   label: 'Blog'
+  #   folder: 'content/blog'
+  #   create: true
+  #   format: 'frontmatter'
+  #   slug: '{{fields.createdAt}}-{{slug}}'
+  #   # editor:
+  #   #   preview: true
+  #   fields:
+  #     - { label: 'Created Date', name: 'createdAt', widget: 'datetime', date_format: "YYYY-MM-DD", time_format: false }
+  #     - { label: 'Title', name: 'title', widget: 'string', required: true }
+  #     - { label: 'Description', name: 'description', widget: 'string', required: false }
+  #     - { label: 'Body', name: 'body', widget: 'markdown', required: false }
+  # - name: 'projects'
+  #   label: 'Projects'
+  #   label_singular: 'Project'
+  #   folder: 'content/projects'
+  #   create: true
+  #   format: 'frontmatter'
+  #   slug: '{{slug}}'
+  #   preview_path: 'projects/{{slug}}'
+  #   fields:
+  #     - {
+  #         label: 'Project Category',
+  #         name: 'category',
+  #         widget: 'select',
+  #         default: 'animals',
+  #         options: [{ label: 'Animals', value: 'animals' }, { label: 'Food', value: 'food' }],
+  #       }
+  #     - { label: 'Title', name: 'title', widget: 'string', required: true }
+  #     - { label: 'Description', name: 'description', widget: 'string', required: false }
+  #     - { label: 'Cover Image', name: 'cover', widget: 'image', required: false, allow_multiple: false }
+  #     - { label: 'Content', name: 'body', widget: 'markdown', required: false }
+  #     - {
+  #         label: 'Gallery',
+  #         name: 'gallery',
+  #         widget: 'list',
+  #         required: false,
+  #         summary: '{{fields.image}}',
+  #         field: { label: 'Image', name: 'image', widget: 'image' },
+  #       }
+
+  - name: 'pages'
+    label: 'Pages'
+    editor:
+      preview: false
+    files:
+      - label: 'Landing Page'
+        name: 'landing'
+        file: 'src/_settings/landing.json'
+        description: 'General Site Settings'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+              - { label: 'Call to Action', name: 'cta', widget: 'string' }
+
+          - { label: 'Activate Trusted', name: 'trustedBool', widget: 'boolean', default: false }
+
+          - label: 'Trusted By'
+            name: trusted
+            label_singular: 'trustee'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string' }
+              - { label: 'Link', name: 'link', widget: 'string' }
+              - { label: 'Image', name: 'image', widget: 'image', hint: 'Format: PNG with transparent background' }
+          - label: 'Boxes'
+            name: boxes
+            widget: 'object'
+            fields:
+              - label: 'Header'
+                name: header
+                widget: 'object'
+                fields:
+                  - { label: 'Box Title', name: 'title', widget: 'string' }
+                  - { label: 'Box Sub Text', name: 'subtext', widget: 'string' }
+              - label: 'Boxes'
+                name: boxes
+                widget: 'object'
+                fields:
+                  - label: 'Box 1'
+                    name: box1
+                    widget: 'object'
+                    fields:
+                      - { label: 'Title', name: 'title', widget: 'string' }
+                      - { label: 'Content', name: 'content', widget: 'text' }
+                  - label: 'Box 2'
+                    name: box2
+                    widget: 'object'
+                    fields:
+                      - { label: 'Title', name: 'title', widget: 'string' }
+                      - { label: 'Content', name: 'content', widget: 'text' }
+                  - label: 'Box 3'
+                    name: box3
+                    widget: 'object'
+                    fields:
+                      - { label: 'Title', name: 'title', widget: 'string' }
+                      - { label: 'Content', name: 'content', widget: 'text' }
+                  - label: 'Box 4'
+                    name: box4
+                    widget: 'object'
+                    fields:
+                      - { label: 'Title', name: 'title', widget: 'string' }
+                      - { label: 'Content', name: 'content', widget: 'text' }
+
+          - label: 'Flow'
+            name: flow
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Subtitle', name: 'subtext', widget: 'text' }
+              - { label: 'Link', name: 'link', required: false, widget: 'string' }
+              - label: 'Page link'
+                name: page
+                required: false
+                widget: 'select'
+                options:
+                  [
+                    'about',
+                    'contact',
+                    'ecommerce',
+                    'garment-makers',
+                    'drops',
+                    'index',
+                    'input-suppliers',
+                    'matching-marketplace',
+                    'pricing',
+                    'product-buyers',
+                    'service-providers',
+                    'sourcing-buyers',
+                    'supply-chain',
+                    'sustainability',
+                    'why-africa',
+                    'country-reps',
+                    'freelancers',
+                  ]
+                hint: 'Index is the home page'
+
+          - label: 'Drop'
+            name: drop
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Subtitle', name: 'subtext', widget: 'text' }
+              - { label: 'Link', name: 'link', required: false, widget: 'string' }
+              - label: 'Page link'
+                name: page
+                required: false
+                widget: 'select'
+                options:
+                  [
+                    'about',
+                    'contact',
+                    'ecommerce',
+                    'garment-makers',
+                    'drops',
+                    'index',
+                    'input-suppliers',
+                    'matching-marketplace',
+                    'pricing',
+                    'product-buyers',
+                    'service-providers',
+                    'sourcing-buyers',
+                    'supply-chain',
+                    'sustainability',
+                    'why-africa',
+                    'country-reps',
+                    'freelancers',
+                  ]
+                hint: 'Index is the home page'
+
+          - label: 'Reps'
+            name: reps
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'Subtitle', name: 'subtext', widget: 'text' }
+              - { label: 'Link', name: 'link', required: false, widget: 'string' }
+              - label: 'Page link'
+                name: page
+                required: false
+                widget: 'select'
+                options:
+                  [
+                    'about',
+                    'contact',
+                    'ecommerce',
+                    'garment-makers',
+                    'drops',
+                    'index',
+                    'input-suppliers',
+                    'matching-marketplace',
+                    'pricing',
+                    'product-buyers',
+                    'service-providers',
+                    'sourcing-buyers',
+                    'supply-chain',
+                    'sustainability',
+                    'why-africa',
+                    'country-reps',
+                    'freelancers',
+                  ]
+                hint: 'Index is the home page'
+
+      - label: 'Announcement'
+        name: 'announce'
+        file: 'src/_settings/announce.json'
+        fields:
+          - label: 'Active?'
+            name: 'active'
+            widget: 'boolean'
+            default: false
+
+          - { label: 'Text', name: 'text', widget: 'string' }
+          - { label: 'Link', name: 'link', widget: 'string', hint: 'in the format: www.abana.mu/example' }
+
+      - label: 'Matching Marketplace'
+        name: 'matching'
+        file: 'src/_settings/matching.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+              - { label: 'Image', name: 'image', widget: 'image' }
+          - label: 'Content'
+            name: content
+            widget: 'object'
+            fields:
+              - label: 'Database'
+                name: database
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'SubText', name: 'subtext', widget: 'text' }
+                  - label: 'Elements'
+                    name: elements
+                    widget: 'object'
+                    fields:
+                      - label: 'For Buyers'
+                        name: buyers
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+                      - label: 'For Garment Makers'
+                        name: gm
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+                      - label: 'For Input Suppliers & Service Providers'
+                        name: issp
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+                      - label: 'Intuitive & Useful Functionalities'
+                        name: functionalities
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+              - label: 'Marketplace'
+                name: marketplace
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'SubText', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Image', name: 'image', widget: 'image' }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+
+      - label: 'Drops'
+        name: 'drops'
+        file: 'src/_settings/drops.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+              - { label: 'Youtube Video', name: 'video', widget: 'string', hint: 'Add youtube URL' }
+
+          - label: 'Elements'
+            name: elements
+            label_singular: 'element'
+            widget: list
+            fields:
+              - { label: 'ID', name: 'id', widget: 'string', hint: 'block+#' }
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - {
+                  label: 'Content',
+                  name: 'content',
+                  widget: 'markdown',
+                  hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Link', name: 'link', required: false, widget: 'string' }
+              - label: 'Page link'
+                name: page
+                required: false
+                widget: 'select'
+                options:
+                  [
+                    'about',
+                    'contact',
+                    'ecommerce',
+                    'garment-makers',
+                    'drops',
+                    'index',
+                    'input-suppliers',
+                    'matching-marketplace',
+                    'pricing',
+                    'product-buyers',
+                    'service-providers',
+                    'sourcing-buyers',
+                    'supply-chain',
+                    'sustainability',
+                    'why-africa',
+                    'country-reps',
+                    'freelancers',
+                  ]
+                hint: 'Index is the home page'
+
+      - label: 'Fast Custom'
+        name: 'fastcustom'
+        file: 'src/_settings/fastcustom.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+          - label: 'Elements'
+            name: elements
+            label_singular: 'element'
+            widget: list
+            fields:
+              - { label: 'ID', name: 'id', widget: 'string', hint: 'block+#' }
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - {
+                  label: 'Content',
+                  name: 'content',
+                  widget: 'markdown',
+                  hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Link', name: 'link', required: false, widget: 'string' }
+              - label: 'Page link'
+                name: page
+                required: false
+                widget: 'select'
+                options:
+                  [
+                    'about',
+                    'contact',
+                    'ecommerce',
+                    'garment-makers',
+                    'drops',
+                    'index',
+                    'input-suppliers',
+                    'matching-marketplace',
+                    'pricing',
+                    'product-buyers',
+                    'service-providers',
+                    'sourcing-buyers',
+                    'supply-chain',
+                    'sustainability',
+                    'why-africa',
+                    'country-reps',
+                    'freelancers',
+                  ]
+                hint: 'Index is the home page'
+
+      - label: 'Supply Chain Solutions'
+        name: 'supplychain'
+        file: 'src/_settings/supplychain.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+              - { label: 'Image', name: 'image', widget: 'image' }
+              - { label: 'Link', name: 'link', required: false, widget: 'string' }
+              - label: 'Page link'
+                name: page
+                required: false
+                widget: 'select'
+                options:
+                  [
+                    'about',
+                    'contact',
+                    'ecommerce',
+                    'garment-makers',
+                    'drops',
+                    'index',
+                    'input-suppliers',
+                    'matching-marketplace',
+                    'pricing',
+                    'product-buyers',
+                    'service-providers',
+                    'sourcing-buyers',
+                    'supply-chain',
+                    'sustainability',
+                    'why-africa',
+                    'country-reps',
+                    'freelancers',
+                  ]
+                hint: 'Index is the home page'
+          - label: 'Elements'
+            name: elements
+            widget: 'object'
+            fields:
+              - label: 'Support Services'
+                name: support
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Subtext', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Image', name: 'image', widget: 'image' }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+              - label: 'Virtual Supplier'
+                name: virtual
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Subtext', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Image', name: 'image', widget: 'image' }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+              - label: 'Advisory'
+                name: advisory
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Subtext', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Image', name: 'image', widget: 'image' }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+
+      - label: 'Why Africa'
+        name: 'whyafrica'
+        file: 'src/_settings/whyafrica.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+          - label: 'Elements'
+            name: elements
+            widget: 'object'
+            fields:
+              - label: 'Economic'
+                name: economic
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Subtext', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+              - label: 'Social'
+                name: social
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Subtext', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+              - label: 'Environmental'
+                name: environmental
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Subtext', name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+
+      - label: 'Pricing'
+        name: 'pricing'
+        file: 'src/_settings/pricing.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+      - label: 'Testimonials'
+        name: 'testimonials'
+        file: 'src/_settings/testimonials.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+      - label: 'About Us'
+        name: 'aboutus'
+        file: 'src/_settings/aboutus.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+          - label: 'Arif'
+            name: arif
+            widget: 'markdown'
+            hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"'
+
+          - label: 'Dirk'
+            name: dirk
+            widget: 'markdown'
+            hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"'
+
+          - label: 'Elements'
+            name: elements
+            widget: 'object'
+            fields:
+              - label: 'Who'
+                name: who
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - {
+                      label: 'Subtext',
+                      name: 'subtext',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+              - label: 'Where'
+                name: where
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - {
+                      label: 'Subtext',
+                      name: 'subtext',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+              - label: 'With'
+                name: with
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - {
+                      label: 'Subtext',
+                      name: 'subtext',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+              - label: 'Why'
+                name: Why
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - {
+                      label: 'Subtext',
+                      name: 'subtext',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+
+      - label: 'Careers'
+        name: 'careers'
+        file: 'src/_settings/careers.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+      - label: 'Press'
+        name: 'press'
+        file: 'src/_settings/press.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+      - label: 'Sustainability'
+        name: 'sustainability'
+        file: 'src/_settings/sustainability.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+          - label: 'Content'
+            name: content
+            widget: 'object'
+            fields:
+              - label: 'Solutions'
+                name: solutions
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'SubText', name: 'subtext', widget: 'text' }
+                  - label: 'Elements'
+                    name: elements
+                    widget: 'object'
+                    fields:
+                      - label: 'Discover Africa'
+                        name: discover
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - { label: 'Content', name: 'content', widget: 'markdown' }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+                      - label: 'Transparency'
+                        name: transparency
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+              - label: 'Sustainability'
+                name: sustainability
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'SubText', name: 'subtext', widget: 'text' }
+                  - label: 'Elements'
+                    name: elements
+                    widget: 'object'
+                    fields:
+                      - label: 'Value'
+                        name: value
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+                      - label: 'Materials'
+                        name: materials
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+                      - label: 'Process'
+                        name: process
+                        widget: 'object'
+                        fields:
+                          - { label: 'Title', name: 'title', widget: 'string' }
+                          - {
+                              label: 'Content',
+                              name: 'content',
+                              widget: 'markdown',
+                              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                            }
+                          - { label: 'Image', name: 'image', widget: 'image' }
+                          - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                          - label: 'Page link'
+                            name: page
+                            required: false
+                            widget: 'select'
+                            options:
+                              [
+                                'about',
+                                'contact',
+                                'ecommerce',
+                                'garment-makers',
+                                'drops',
+                                'index',
+                                'input-suppliers',
+                                'matching-marketplace',
+                                'pricing',
+                                'product-buyers',
+                                'service-providers',
+                                'sourcing-buyers',
+                                'supply-chain',
+                                'sustainability',
+                                'why-africa',
+                                'country-reps',
+                                'freelancers',
+                              ]
+                            hint: 'Index is the home page'
+              - label: 'Commitment'
+                name: commitment
+                widget: 'object'
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'SubText', required: false, name: 'subtext', widget: 'text' }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'markdown',
+                      hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+                    }
+                  - { label: 'Image', name: 'image', widget: 'image' }
+                  - { label: 'Link', name: 'link', required: false, widget: 'string' }
+                  - label: 'Page link'
+                    name: page
+                    required: false
+                    widget: 'select'
+                    options:
+                      [
+                        'about',
+                        'contact',
+                        'ecommerce',
+                        'garment-makers',
+                        'drops',
+                        'index',
+                        'input-suppliers',
+                        'matching-marketplace',
+                        'pricing',
+                        'product-buyers',
+                        'service-providers',
+                        'sourcing-buyers',
+                        'supply-chain',
+                        'sustainability',
+                        'why-africa',
+                        'country-reps',
+                        'freelancers',
+                      ]
+                    hint: 'Index is the home page'
+
+      - label: 'Contact Us'
+        name: 'contact'
+        file: 'src/_settings/contact.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+      - label: 'Freelancers'
+        name: 'freelancers'
+        file: 'src/_settings/freelancers.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+
+          - { label: 'SubText', name: 'subtitle', widget: 'text' }
+          - {
+              label: 'Content',
+              name: 'content',
+              widget: 'markdown',
+              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+            }
+
+      - label: 'Terms'
+        name: 'terms'
+        file: 'src/_settings/terms.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+          - {
+              label: 'Content',
+              name: 'content',
+              widget: 'markdown',
+              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+            }
+
+      - label: 'Privacy'
+        name: 'privacy'
+        file: 'src/_settings/privacy.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+          - {
+              label: 'Content',
+              name: 'content',
+              widget: 'markdown',
+              hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+            }
+
+      - label: 'Register'
+        name: 'register'
+        file: 'src/_settings/register.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+
+  - name: 'countryreps'
+    label: 'Country Reps'
+    editor:
+      preview: false
+    files:
+      - label: 'Header Content'
+        name: 'header'
+        file: 'src/_settings/countryreps.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+      - label: 'Europe Country Reps'
+        name: 'eu_reps'
+        file: 'src/_settings/eureps.json'
+        fields:
+          - label: 'Europe Country Reps'
+            name: reps
+            label_singular: 'Country Rep'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string', hint: 'First and Last' }
+              - { label: 'Location', name: 'location', widget: 'string' }
+              - { label: 'Company', name: 'company', widget: 'string' }
+              - { label: 'Georgraphic Coverage', name: 'coverage', widget: 'text' }
+      - label: 'Africa Country Reps'
+        name: 'af_reps'
+        file: 'src/_settings/afreps.json'
+        fields:
+          - label: 'Africa Country Reps'
+            name: reps
+            label_singular: 'Country Rep'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string', hint: 'First and Last' }
+              - { label: 'Location', name: 'location', widget: 'string' }
+              - { label: 'Company', name: 'company', widget: 'string' }
+              - { label: 'Georgraphic Coverage', name: 'coverage', widget: 'text' }
+      - label: 'America Country Reps'
+        name: 'am_reps'
+        file: 'src/_settings/amreps.json'
+        fields:
+          - label: 'America Country Reps'
+            name: reps
+            label_singular: 'Country Rep'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string', hint: 'First and Last' }
+              - { label: 'Location', name: 'location', widget: 'string' }
+              - { label: 'Company', name: 'company', widget: 'string' }
+              - { label: 'Georgraphic Coverage', name: 'coverage', widget: 'text' }
+
+      - label: 'Asia Country Reps'
+        name: 'as_reps'
+        file: 'src/_settings/asreps.json'
+        fields:
+          - label: 'Asia Country Reps'
+            name: reps
+            label_singular: 'Country Rep'
+            widget: list
+            fields:
+              - { label: 'Name', name: 'name', widget: 'string', hint: 'First and Last' }
+              - { label: 'Location', name: 'location', widget: 'string' }
+              - { label: 'Company', name: 'company', widget: 'string' }
+              - { label: 'Georgraphic Coverage', name: 'coverage', widget: 'text' }
+
+  - name: 'tutorials'
+    label: 'How it works'
+    editor:
+      preview: false
+    files:
+      - label: 'Videos'
+        name: 'videos'
+        file: 'src/_settings/tutorials.json'
+        fields:
+          - label: 'Header'
+            name: header
+            widget: 'object'
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - { label: 'SubText', name: 'subtext', widget: 'text' }
+          - label: 'Categories'
+            name: categories
+            label_singular: 'Category'
+            widget: list
+            fields:
+              - { label: 'Title', name: 'title', widget: 'string' }
+              - label: 'Tutorial'
+                name: tutorial
+                label_singular: 'Tutorial'
+                widget: list
+                fields:
+                  - { label: 'Title', name: 'title', widget: 'string' }
+                  - { label: 'Video', name: 'video', widget: 'string', hint: 'Youtube Link' }
+
+  - name: 'careers' # Used in routes, e.g., /admin/collections/blog
+    label: 'Jobs' # Used in the UI
+    folder: '_careers/' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'blog' }
+      - label: 'Available?'
+        name: filled
+        required: true
+        widget: 'select'
+        options: ['filled', 'open']
+        hint: 'filled = display that position has been filled'
+      - { label: 'Title', name: 'title', widget: 'string' }
       - {
-          label: 'Project Category',
-          name: 'category',
+          label: 'Department',
+          name: 'department',
           widget: 'select',
-          default: 'animals',
-          options: [{ label: 'Animals', value: 'animals' }, { label: 'Food', value: 'food' }],
+          options:
+            [
+              'Product',
+              'Growth & Sales',
+              'Textile & Apparel Design',
+              'Marketing & Visuals',
+              'Operations',
+              'Engineering',
+            ],
         }
-      - { label: 'Title', name: 'title', widget: 'string', required: true }
-      - { label: 'Description', name: 'description', widget: 'string', required: false }
-      - { label: 'Cover Image', name: 'cover', widget: 'image', required: false, allow_multiple: false }
-      - { label: 'Content', name: 'body', widget: 'markdown', required: false }
+      - { label: 'Location', name: 'location', widget: 'string' }
       - {
-          label: 'Gallery',
-          name: 'gallery',
-          widget: 'list',
+          label: 'Role',
+          name: 'role',
+          widget: 'markdown',
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+        }
+      - {
+          label: 'Main Tasks',
+          name: 'tasks',
+          widget: 'markdown',
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+        }
+      - {
+          label: 'What you bring to the table',
+          name: 'table',
+          widget: 'markdown',
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+        }
+      - {
+          label: 'You will thrive if',
+          name: 'thrive',
+          widget: 'markdown',
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+        }
+
+  - name: 'press'
+    label: 'Press'
+    folder: '_press/'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Excerpt', name: 'excerpt', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'date' }
+      - { label: 'Banner', name: 'image', widget: 'image' }
+      - { label: 'Original Link', name: 'link', widget: 'string', required: false, hint: 'Optional' }
+      - {
+          label: 'Body',
+          name: 'body',
+          widget: 'markdown',
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+        }
+
+  - name: 'testimonials'
+    label: 'Testimonials'
+    folder: '_testimonials/'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Company', name: 'title', widget: 'string' }
+      - {
+          label: 'Subtitle',
+          name: 'subtitle',
+          widget: 'string',
+          default: '',
           required: false,
-          summary: '{{fields.image}}',
-          field: { label: 'Image', name: 'image', widget: 'image' },
+          hint: 'case study, testimonial or one-liner',
+        }
+      - {
+          label: 'Featured',
+          name: 'featured',
+          widget: 'boolean',
+          default: false,
+          hint: 'Will this go on the front page',
+        }
+      - { label: 'Blurb', name: 'blurb', widget: 'string', hint: 'max 2 sentences' }
+      - {
+          label: 'Quote',
+          name: 'quote',
+          widget: 'markdown',
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
+        }
+      - { label: 'Name', name: 'name', widget: 'string', required: false, hint: 'author of the quote' }
+      - { label: 'Position', name: 'position', widget: 'string', required: false }
+      - { label: 'Background Colour', name: 'color', widget: 'color' }
+      - { label: 'Image', name: 'image', widget: 'image', hint: 'Make sure this image is less than 250kb in size!' }
+      - {
+          label: 'Case Study?',
+          name: 'caseStudy',
+          widget: 'boolean',
+          default: false,
+          hint: 'does this have more content (ex. case study',
+        }
+      - {
+          label: 'Case Study content',
+          name: 'body',
+          widget: 'markdown',
+          required: false,
+          hint: '! IMPORTANT: Before pasting from a word file: Toggle from "Rich Text" to "markdown" (top right) > Paste content > Toggle back to "Rich Text"',
         }
